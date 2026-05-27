@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🇧🇷 Brasil na Copa 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#06101F;
+  --card:rgba(255,255,255,0.05);
+  --card2:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.09);
+  --green:#009C3B;
+  --green2:#00C44A;
+  --yellow:#FFDF00;
+  --blue:#002776;
+  --bluemid:#1A4FBB;
+  --text:#EEF3FF;
+  --muted:rgba(238,243,255,0.45);
+  --win:#22C55E;
+  --loss:#F87171;
+  --draw:#FBBF24;
+  --r:16px;
+  --rsm:10px;
+}
+
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  padding-bottom:84px;
+}
+
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 5% 10%, rgba(0,156,59,.13) 0%,transparent 60%),
+    radial-gradient(ellipse 70% 60% at 95% 85%, rgba(0,39,118,.18) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 50%, rgba(255,223,0,.03) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+
+/* ── HEADER ── */
+header{
+  position:relative;z-index:10;
+  background:linear-gradient(180deg,rgba(0,39,118,.85) 0%,transparent 100%);
+  padding:18px 16px 14px;
+  display:flex;align-items:center;gap:10px;
+}
+.hlogo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1.5px;line-height:1}
+.hlogo .g{color:var(--green)}.hlogo .y{color:var(--yellow)}
+.hsub{font-size:10px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:2px}
+.hbadge{
+  margin-left:auto;background:var(--yellow);color:#000;
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1.5px;
+  padding:5px 12px;border-radius:20px;white-space:nowrap;
+}
+
+/* ── HERO ── */
+.hero{
+  margin:0 12px 18px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,rgba(0,156,59,.18) 0%,rgba(0,39,118,.28) 100%);
+  border:1px solid rgba(0,156,59,.35);border-radius:20px;padding:18px 16px;
+}
+.hero::after{
+  content:'⚽';position:absolute;right:-14px;bottom:-24px;
+  font-size:110px;opacity:.05;transform:rotate(-20deg);pointer-events:none;
+}
+.hero-label{
+  font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--green2);margin-bottom:12px;display:flex;align-items:center;gap:6px;
+}
+.hero-label::before{content:'';width:24px;height:1px;background:var(--green)}
+
+.hero-matchup{display:flex;align-items:center;gap:6px;margin-bottom:14px}
+.hero-team{flex:1;text-align:center}
+.hero-flag{font-size:44px;line-height:1;display:block;margin-bottom:6px}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px}
+.hero-vs{
+  flex:0 0 auto;text-align:center;min-width:68px;
+  font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--yellow);
+}
+.hero-vs small{
+  display:block;font-family:'Outfit',sans-serif;font-size:10px;
+  color:var(--muted);font-weight:400;letter-spacing:.5px;margin-top:2px;
+}
+
+.cd-row{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
+.cd-unit{
+  flex:1;max-width:68px;
+  background:rgba(0,0,0,.35);border:1px solid var(--border);
+  border-radius:12px;padding:8px 4px;text-align:center;
+}
+.cd-num{
+  font-family:'Bebas Neue',sans-serif;font-size:28px;
+  line-height:1;color:var(--yellow);
+}
+.cd-lbl{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+
+.hero-meta{
+  display:flex;gap:6px;flex-wrap:wrap;
+  font-size:11px;color:var(--muted);margin-bottom:14px;align-items:center;
+}
+.hero-meta span{display:flex;align-items:center;gap:4px}
+
+.btn-caze{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:12px;background:#CC0000;border:none;border-radius:12px;
+  color:#fff;font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;
+  letter-spacing:.5px;text-decoration:none;cursor:pointer;transition:background .2s;
+}
+.btn-caze:hover{background:#FF0000}
+.btn-caze .yt-icon{
+  width:20px;height:14px;background:#fff;border-radius:3px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.btn-caze .yt-icon::after{
+  content:'';width:0;height:0;
+  border-top:5px solid transparent;
+  border-bottom:5px solid transparent;
+  border-left:9px solid #CC0000;
+  margin-left:1px;
+}
+
+/* ── BOTTOM NAV ── */
+.tab-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(6,16,31,.96);backdrop-filter:blur(20px);
+  border-top:1px solid var(--border);
+  display:flex;padding:8px 0 max(8px,env(safe-area-inset-bottom));
+}
+.tab-btn{
+  flex:1;background:none;border:none;color:var(--muted);
+  font-family:'Outfit',sans-serif;font-size:9.5px;font-weight:600;
+  letter-spacing:.5px;text-transform:uppercase;cursor:pointer;
+  padding:5px 4px 3px;display:flex;flex-direction:column;
+  align-items:center;gap:3px;transition:color .2s;
+}
+.tab-btn.active{color:var(--yellow)}
+.tab-icon{font-size:20px;line-height:1}
+
+/* ── SECTIONS ── */
+.section{display:none;padding:0 12px}
+.section.active{display:block}
+
+.stitle{
+  font-family:'Bebas Neue',sans-serif;font-size:24px;
+  letter-spacing:2px;color:var(--yellow);margin-bottom:4px;margin-top:20px;
+}
+.ssub{
+  font-size:10px;color:var(--muted);letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:14px;
+}
+
+/* phase separator */
+.phase-sep{
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;
+  color:var(--green);text-transform:uppercase;
+  margin:22px 0 10px;display:flex;align-items:center;gap:8px;
+}
+.phase-sep::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── GAME CARD ── */
+.gcard{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);padding:13px 14px;margin-bottom:10px;
+  transition:all .2s;
+}
+.gcard:hover{background:var(--card2);border-color:rgba(255,255,255,.14)}
+.gcard.win-card{border-color:rgba(34,197,94,.28);background:rgba(34,197,94,.04)}
+.gcard.loss-card{border-color:rgba(248,113,113,.2)}
+.gcard.next-card{
+  border-color:rgba(0,156,59,.55);
+  box-shadow:0 0 24px rgba(0,156,59,.12);
+}
+.gcard.tbd-card{opacity:.45}
+
+.cmeta{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:10px;
+}
+.cphase{
+  font-size:9.5px;font-weight:600;letter-spacing:1px;
+  text-transform:uppercase;color:var(--muted);
+}
+
+.badge{
+  font-size:8.5px;font-weight:700;letter-spacing:.8px;
+  text-transform:uppercase;padding:3px 8px;border-radius:20px;
+}
+.b-final{background:rgba(255,255,255,.07);color:rgba(238,243,255,.4)}
+.b-next{background:var(--green);color:#fff}
+.b-soon{background:rgba(0,196,74,.15);color:var(--green2)}
+.b-tbd{background:rgba(255,255,255,.05);color:rgba(238,243,255,.25)}
+
+/* matchup */
+.matchup{display:flex;align-items:center;gap:6px;margin-bottom:10px}
+.mteam{flex:1;display:flex;align-items:center;gap:8px}
+.mteam.right{flex-direction:row-reverse}
+.mflag{font-size:28px;flex-shrink:0}
+.mname{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.5px;line-height:1.2}
+.mteam.right .mname{text-align:right}
+
+.mscores{flex:0 0 auto;min-width:64px;text-align:center}
+.mscore-num{
+  font-family:'Bebas Neue',sans-serif;font-size:30px;
+  letter-spacing:3px;line-height:1;
+}
+.mscore-num.win{color:var(--win)}
+.mscore-num.loss{color:var(--loss)}
+.mscore-num.draw{color:var(--draw)}
+.mscore-time{
+  font-family:'Bebas Neue',sans-serif;font-size:22px;
+  color:var(--yellow);line-height:1;
+}
+.mscore-tbd{
+  font-size:10px;font-weight:600;color:var(--muted);
+  text-transform:uppercase;letter-spacing:1px;
+}
+
+/* card footer */
+.cfoot{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding-top:10px;border-top:1px solid var(--border);gap:8px;
+}
+.cvenue{font-size:11px;color:var(--muted);line-height:1.5}
+.cvenue strong{display:block;color:rgba(238,243,255,.72);font-weight:600}
+.cright{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.ctime{font-size:12px;font-weight:600;text-align:right}
+.ctime small{display:block;font-size:10px;color:var(--muted);font-weight:400;margin-top:2px}
+
+.caze-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(204,0,0,.18);border:1px solid rgba(204,0,0,.35);
+  color:#FF7777;font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.5px;padding:4px 9px;border-radius:7px;
+  text-decoration:none;cursor:pointer;transition:all .15s;flex-shrink:0;
+  white-space:nowrap;
+}
+.caze-btn:hover{background:rgba(204,0,0,.3);color:#FF9999}
+.caze-btn .ytmini{
+  width:14px;height:10px;background:#CC0000;border-radius:2px;
+  display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.caze-btn .ytmini::after{
+  content:'';width:0;height:0;
+  border-top:3.5px solid transparent;border-bottom:3.5px solid transparent;
+  border-left:6px solid #fff;margin-left:1px;
+}
+
+/* ── GROUP TABLE ── */
+.gtable-wrap{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;margin-bottom:16px;
+}
+.gtable-head{
+  background:linear-gradient(135deg,rgba(0,39,118,.65),rgba(0,156,59,.35));
+  padding:14px 16px;display:flex;align-items:center;gap:10px;
+}
+.gtable-head h3{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px}
+.gbadge{
+  background:var(--yellow);color:#000;
+  font-family:'Bebas Neue',sans-serif;font-size:13px;
+  padding:2px 9px;border-radius:5px;
+}
+
+table{width:100%;border-collapse:collapse}
+thead tr{border-bottom:1px solid var(--border)}
+th{
+  padding:8px 5px;font-size:8.5px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted);text-align:center;
+}
+th:first-child,th:nth-child(2){text-align:left}
+th:nth-child(2){padding-left:12px}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:rgba(255,255,255,.04)}
+tbody tr.hl{background:rgba(0,156,59,.1)}
+td{padding:10px 5px;font-size:13px;text-align:center}
+td:first-child{width:26px;color:var(--muted);font-size:10px;font-weight:700;position:relative}
+td.tname{text-align:left;padding-left:12px;font-weight:600}
+td.pts{font-weight:700;font-size:15px;color:var(--yellow)}
+.qbar{
+  position:absolute;left:0;top:0;bottom:0;width:3px;
+  border-radius:2px;background:var(--green);
+}
+
+/* legend */
+.legend{
+  display:flex;gap:14px;flex-wrap:wrap;padding:10px 16px;
+  border-top:1px solid var(--border);font-size:10px;color:var(--muted);
+}
+.legend-item{display:flex;align-items:center;gap:5px}
+.ldot{width:8px;height:8px;border-radius:50%}
+
+/* team info card */
+.team-info-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);padding:14px;margin-bottom:10px;
+  display:flex;align-items:center;gap:14px;
+}
+.ti-flag{font-size:38px;flex-shrink:0}
+.ti-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;margin-bottom:4px}
+.ti-sub{font-size:11px;color:var(--muted);line-height:1.5}
+.ti-tag{
+  display:inline-block;margin-top:5px;
+  font-size:10px;font-weight:600;padding:2px 8px;border-radius:5px;
+}
+
+/* ── CALENDAR ── */
+.cal-month{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;margin-bottom:12px;
+}
+.cal-mhead{
+  background:linear-gradient(135deg,rgba(0,39,118,.6),rgba(0,156,59,.3));
+  padding:13px 16px;
+  font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;
+}
+.cal-wdays{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  border-bottom:1px solid var(--border);
+}
+.cal-wd{
+  padding:8px 2px;text-align:center;font-size:8.5px;
+  font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);
+}
+.cal-days{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  padding:4px;gap:2px;
+}
+.cal-day{
+  aspect-ratio:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  font-size:12px;border-radius:8px;border:1px solid transparent;
+  transition:all .15s;position:relative;
+}
+.cal-day.empty{pointer-events:none;opacity:0}
+.cal-day.has-game{
+  background:rgba(0,156,59,.16);border-color:rgba(0,156,59,.4);
+  font-weight:700;color:var(--green2);cursor:pointer;
+}
+.cal-day.has-game:hover{background:rgba(0,156,59,.28)}
+.cal-day.past-game{
+  background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);color:var(--muted);
+}
+.cal-day.today{
+  border-color:var(--yellow);color:var(--yellow);font-weight:700;
+}
+.cal-day.today::after{
+  content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);
+  width:4px;height:4px;background:var(--yellow);border-radius:50%;
+}
+.cal-df{font-size:7px;line-height:1;margin-top:1px}
+
+/* timeline */
+.tl-item{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start}
+.tl-dot-col{flex-shrink:0;display:flex;flex-direction:column;align-items:center;margin-top:4px}
+.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.tl-line{width:1px;flex:1;background:var(--border);min-height:18px;margin-top:4px}
+.tl-card{
+  flex:1;background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:10px 12px;
+}
+.tl-phase{font-size:9.5px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.tl-match{
+  font-family:'Bebas Neue',sans-serif;font-size:15px;
+  letter-spacing:.5px;display:flex;align-items:center;flex-wrap:wrap;gap:4px;
+}
+.tl-meta{font-size:10px;color:var(--muted);margin-top:4px}
+
+/* ── RESPONSIVE ── */
+@media(min-width:480px){
+  .hero-flag{font-size:52px}
+  .hero-name{font-size:20px}
+  .hero-vs{font-size:34px}
+  .mflag{font-size:32px}
+  .mname{font-size:19px}
+}
+@media(min-width:768px){
+  body{padding-bottom:0}
+  main{max-width:700px;margin:0 auto}
+  .tab-nav{
+    position:sticky;top:0;order:-1;
+    border-top:none;border-bottom:1px solid var(--border);
+    max-width:700px;margin:0 auto;
+  }
+}
+
+/* pulse animation for next game badge */
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,196,74,.5)}70%{box-shadow:0 0 0 6px rgba(0,196,74,0)}}
+.b-next{animation:pulse 2s infinite}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <div class="hlogo"><span class="g">Brasil</span> <span class="y">Copa</span> <span class="g">2026</span></div>
+    <div class="hsub">Rumo ao Hexa</div>
+  </div>
+  <div class="hbadge">🇧🇷 FIFA</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Próximo Jogo</div>
+  <div class="hero-matchup">
+    <div class="hero-team">
+      <span class="hero-flag">🇧🇷</span>
+      <div class="hero-name">Brasil</div>
+    </div>
+    <div class="hero-vs">
+      VS
+      <small id="heroInfo">31 Mai · 18h30</small>
+    </div>
+    <div class="hero-team">
+      <span class="hero-flag" id="heroFlag">🇵🇦</span>
+      <div class="hero-name" id="heroAway">Panamá</div>
+    </div>
+  </div>
+
+  <div class="cd-row">
+    <div class="cd-unit"><div class="cd-num" id="cd-d">04</div><div class="cd-lbl">Dias</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-h">00</div><div class="cd-lbl">Horas</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-m">00</div><div class="cd-lbl">Min</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-s">00</div><div class="cd-lbl">Seg</div></div>
+  </div>
+
+  <div class="hero-meta">
+    <span>📍 Maracanã, Rio de Janeiro</span>
+    <span>🏷️ Amistoso Preparatório</span>
+  </div>
+
+  <a href="https://www.youtube.com/@CazeTVOficial" target="_blank" rel="noopener" class="btn-caze">
+    <div class="yt-icon"></div>
+    Assistir na CAZÉ TV — YouTube
+  </a>
+</div>
+
+<!-- MAIN -->
+<main>
+
+<!-- BOTTOM NAV -->
+<nav class="tab-nav">
+  <button class="tab-btn active" id="tab-jogos" onclick="showTab('jogos')">
+    <span class="tab-icon">⚽</span>Jogos
+  </button>
+  <button class="tab-btn" id="tab-grupo" onclick="showTab('grupo')">
+    <span class="tab-icon">📊</span>Grupo C
+  </button>
+  <button class="tab-btn" id="tab-cal" onclick="showTab('cal')">
+    <span class="tab-icon">🗓️</span>Calendário
+  </button>
+</nav>
+
+<!-- ═══════════════════════ JOGOS ═══════════════════════ -->
+<section class="section active" id="section-jogos">
+
+  <div class="phase-sep">Amistosos Preparatórios</div>
+
+  <!-- França - FINALIZADO (derrota) -->
+  <div class="gcard loss-card">
+    <div class="cmeta">
+      <div class="cphase">Amistoso Internacional</div>
+      <span class="badge b-final">Finalizado</span>
+    </div>
+    <div class="matchup">
+      <div class="mteam"><span class="mflag">🇧🇷</span><div class="mname">Brasil</div></div>
+      <div class="mscores"><div class="mscore-num loss">1 — 2</div></div>
+      <div class="mteam right"><span class="mflag">🇫🇷</span><div class="mname">França</div></div>
+    </div>
+    <div class="cfoot">
+      <div class="cvenue"><strong>Gillette Stadium</strong>Boston, EUA</div>
+      <div class="cright">
+        <div class="ctime">21h BRT<small>26 Mar 2026 · Qui</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Croácia - FINALIZADO (vitória) -->
+  <div class="gcard win-card">
+    <div class="cmeta">
+      <div class="cphase">Amistoso Internacional</div>
+      <span class="badge b-final">Finalizado</span>
+    </div>
+    <div class="matchup">
+      <div class="mteam"><span class="mflag">🇧🇷</span><div class="mname">Brasil</div></div>
+      <div class="mscores"><div class="mscore-num win">3 — 1</div></div>
+      <div class="mteam right"><span class="mflag">🇭🇷</span><div class="mname">Croácia</div></div>
+    </div>
+    <div class="cfoot">
+      <div class="cvenue"><strong>Camping World Stadium</strong>Orlando, EUA</div>
+      <div class="cright">
+        <div class="ctime">21h BRT<small>31 Mar 2026 · Ter</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panamá - PRÓXIMO JOGO -->
+  <div class="gcard next-card">
+    <div class="cmeta">
+      <div class="cphase">Amistoso Internacional · Despedida</div>
+      <span class="badge b-next">Próximo Jogo</span>
+    </div>
+    <div class="matchup">
+      <div class="mteam"><span class="mflag">🇧🇷</span><div class="mname">Brasil</div></div>
+      <div class="mscores"><div class="mscore-time">18h30</div></div>
+      <div class="mteam right"><span class="mflag">🇵🇦</span><div class="mname">Panamá</div></div>
+    </div>
+    <div class="cfoot">
+      <div class="cvenue"><strong>Maracanã</strong>Rio de Janeiro, Brasil</div>
+      <div class="cright">
+        <div class="ctime">18h30 BRT<small>31 Mai 2026 · Dom</small></div>
+        <a href="https://www.youtube.com/@CazeTVOficial" target="_blank" rel="noopener" class="caze-btn">
+          <span class="ytmini"></span>CAZÉ TV
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Egito - EM BREVE -->
+  <div class="gcard">
+    <div class="cmeta">
+      <div class="cphase">Amistoso Internacional · EUA</div>
+      <span class="badge b-soon">Em Breve</span>
+    </div>
+    <div class="matchup">
+      <div class="mteam"><span class="mflag">🇧🇷</span><div class="mname">Brasil</div></div>
+      <div class="mscores"><div class="mscore-time" style="font-size:17px;color:var(--muted)">A CONF.</div></div>
+      <div class="mteam right"><span class="mflag">🇪🇬</span><div class="mname">Egito</div></div>
+    </div>
+    <div class="cfoot">
+      <div class="cvenue"><strong>Huntington Bank Field</strong>Cleveland, EUA</div>
+      <div class="cright">
+        <div class="ctime">Horário a confirmar<small>6 Jun 2026 · Sáb</small></div>
+        <a href="https://www.youtube.com/@CazeTVOficial" target="_blank" rel="noopener" class="caze-btn">
+          <span class="ytmini"></span>CAZÉ TV
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-sep">Copa do Mundo 2026 — Fase de Grupos</div>
+  <div class="ssub" style="margin-top:-6px">Grupo C · Estados Unidos</div>
+
+  <!-- Marrocos -->
+  <div class="gcard">
+    <div class="cmeta">
+      <div class="cphase">Rodada 1 · Grupo C</div>
+      <span class="badge b-soon">Em Breve</span>
+    </div>
+    <div class="matchup">
+      <div class="mteam"><span class="mflag">🇧🇷</span><div class="mname">Brasil</div></div>
+      <div class="mscores"><div class="mscore-time">19h</div></div>
+      <div class="mteam right"><span class="mflag">🇲🇦</span><div class="mname">Marrocos</div></div>
+    </div>
+    <div class="cfoot">
+      <div class="cvenue"><strong>MetLife Stadium</strong>Nova Jersey, EUA</div>
+      <div class="cright">
+        <div class="ctime">19h BRT<small>13 Jun 2026 · Sáb</small></div>
+        <a href="https://www.youtube.com/@CazeTVOficial" target="_blank" rel="noopener" class="caze-btn">
+          <span class="ytmini"></span>CAZÉ TV
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Haiti -->
+  <div class="gcard">
+    <div class="cmeta">
+      <div class="cphase">Rodada 2 · Grupo C</div>
+      <span class="badge b-soon">Em Breve</span>
+    </div>
+    <div class="matchup">
+      <div class="mteam"><span class="mflag">🇧🇷</span><div class="mname">Brasil</div></div>
+      <div class="mscores"><div class="mscore-time">21h30</div></div>
+      <div class="mteam right"><span class="mflag">🇭🇹</span><div class="mname">Haiti</div></div>
+    </div>
+    <div class="cfoot">
+      <div class="cvenue"><strong>Lincoln Financial Field</strong>Filadélfia, EUA</div>
+      <div class="cright">
+        <div class="ctime">21h30 BRT<small>19 Jun 2026 · Sex</small></div>
+        <a href="https://www.youtube.com/@CazeTVOficial" target="_blank" rel="noopener" class="caze-btn">
+          <span class="ytmini"></span>CAZÉ TV
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Escócia -->
+  <div class="gcard">
+    <div class="cmeta">
+      <div class="cphase">Rodada 3 · Grupo C</div>
+      <span class="badge b-soon">Em Breve</span>
+    </div>
+    <div class="matchup">
+      <div class="mteam"><span class="mflag">🇧🇷</span><div class="mname">Brasil</div></div>
+      <div class="mscores"><div class="mscore-time">19h</div></div>
+      <div class="mteam right"><span class="mflag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><div class="mname">Escócia</div></div>
+    </div>
+    <div class="cfoot">
+      <div class="cvenue"><strong>Hard Rock Stadium</strong>Miami, EUA</div>
+      <div class="cright">
+        <div class="ctime">19h BRT<small>24 Jun 2026 · Qua</small></div>
+        <a href="https://www.youtube.com/@CazeTVOficial" target="_blank" rel="noopener" class="caze-btn">
+          <span class="ytmini"></span>CAZÉ TV
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-sep">Mata-Mata — Possível Caminho</div>
+
+  <!-- Oitavas -->
+  <div class="gcard tbd-card">
+    <div class="cmeta">
+      <div class="cphase">Oitavas de Final</div>
+      <span class="badge b-tbd">A Definir</span>
+    </div>
+    <div class="matchup">
+      <div class="mteam"><span class="mflag">🇧🇷</span><div class="mname">Brasil</div></div>
+      <div class="mscores"><div class="mscore-tbd">Classif.<br>necessária</div></div>
+      <div class="mteam right"><span class="mflag" style="font-size:22px">❓</span><div class="mname">Adversário</div></div>
+    </div>
+    <div class="cfoot">
+      <div class="cvenue"><strong>Houston (1º) / Monterrey (2º)</strong>Depende da classificação</div>
+      <div class="cright">
+        <div class="ctime">14h ou 22h BRT<small>29 Jun 2026 · Seg</small></div>
+        <a href="https://www.youtube.com/@CazeTVOficial" target="_blank" rel="noopener" class="caze-btn">
+          <span class="ytmini"></span>CAZÉ TV
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quartas -->
+  <div class="gcard tbd-card">
+    <div class="cmeta">
+      <div class="cphase">Quartas de Final</div>
+      <span class="badge b-tbd">A Definir</span>
+    </div>
+    <div class="matchup">
+      <div class="mteam"><span class="mflag">🇧🇷</span><div class="mname">Brasil</div></div>
+      <div class="mscores"><div class="mscore-tbd">Classif.<br>necessária</div></div>
+      <div class="mteam right"><span class="mflag" style="font-size:22px">❓</span><div class="mname">Adversário</div></div>
+    </div>
+    <div class="cfoot">
+      <div class="cvenue"><strong>A definir</strong>Estados Unidos</div>
+      <div class="cright">
+        <div class="ctime">A definir<small>~4 Jul 2026</small></div>
+        <a href="https://www.youtube.com/@CazeTVOficial" target="_blank" rel="noopener" class="caze-btn">
+          <span class="ytmini"></span>CAZÉ TV
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Semi -->
+  <div class="gcard tbd-card">
+    <div class="cmeta">
+      <div class="cphase">Semifinal</div>
+      <span class="badge b-tbd">A Definir</span>
+    </div>
+    <div class="matchup">
+      <div class="mteam"><span class="mflag">🇧🇷</span><div class="mname">Brasil</div></div>
+      <div class="mscores"><div class="mscore-tbd">Classif.<br>necessária</div></div>
+      <div class="mteam right"><span class="mflag" style="font-size:22px">❓</span><div class="mname">Adversário</div></div>
+    </div>
+    <div class="cfoot">
+      <div class="cvenue"><strong>A definir</strong>Estados Unidos</div>
+      <div class="cright">
+        <div class="ctime">A definir<small>~9 Jul 2026</small></div>
+        <a href="https://www.youtube.com/@CazeTVOficial" target="_blank" rel="noopener" class="caze-btn">
+          <span class="ytmini"></span>CAZÉ TV
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL -->
+  <div class="gcard tbd-card" style="border-color:rgba(255,223,0,.2);opacity:.55;margin-bottom:20px">
+    <div class="cmeta">
+      <div class="cphase" style="color:var(--yellow)">🏆 Grande Final</div>
+      <span class="badge b-tbd">A Definir</span>
+    </div>
+    <div class="matchup">
+      <div class="mteam"><span class="mflag">🇧🇷</span><div class="mname">Brasil</div></div>
+      <div class="mscores"><span style="font-size:28px">🏆</span></div>
+      <div class="mteam right"><span class="mflag" style="font-size:22px">❓</span><div class="mname">Adversário</div></div>
+    </div>
+    <div class="cfoot">
+      <div class="cvenue"><strong>MetLife Stadium</strong>Nova Jersey, EUA</div>
+      <div class="cright">
+        <div class="ctime">17h BRT<small>19 Jul 2026 · Dom</small></div>
+        <a href="https://www.youtube.com/@CazeTVOficial" target="_blank" rel="noopener" class="caze-btn">
+          <span class="ytmini"></span>CAZÉ TV
+        </a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════ GRUPO C ═══════════════════════ -->
+<section class="section" id="section-grupo">
+
+  <div class="stitle">Grupo C</div>
+  <div class="ssub">Copa do Mundo 2026 · Estados Unidos</div>
+
+  <div class="gtable-wrap">
+    <div class="gtable-head">
+      <span style="font-size:20px">🏆</span>
+      <h3>GRUPO C</h3>
+      <div class="gbadge">GRUPO C</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th style="text-align:left;padding-left:12px">Seleção</th>
+          <th>PJ</th>
+          <th>V</th>
+          <th>E</th>
+          <th>D</th>
+          <th>GP</th>
+          <th>GC</th>
+          <th>SG</th>
+          <th>PTS</th>
+        </tr>
+      </thead>
+      <tbody id="gtbody"></tbody>
+    </table>
+    <div class="legend">
+      <div class="legend-item"><div class="ldot" style="background:var(--green)"></div>Classificado (Top 2)</div>
+      <div class="legend-item"><div class="ldot" style="background:var(--bluemid)"></div>Possível Top 3</div>
+    </div>
+  </div>
+
+  <div class="stitle" style="margin-top:24px">Adversários</div>
+  <div class="ssub">Conheça o grupo</div>
+
+  <div class="team-info-card">
+    <div class="ti-flag">🇧🇷</div>
+    <div>
+      <div class="ti-name">Brasil</div>
+      <div class="ti-sub">Cabeça de Chave · Técnico: Carlo Ancelotti</div>
+      <span class="ti-tag" style="background:rgba(0,156,59,.2);color:var(--green2)">🏆 5× Campeão do Mundo</span>
+    </div>
+  </div>
+
+  <div class="team-info-card">
+    <div class="ti-flag">🇲🇦</div>
+    <div>
+      <div class="ti-name">Marrocos</div>
+      <div class="ti-sub">Maior desafio do grupo — 4º lugar no Qatar 2022<br>Sistema defensivo sólido e transições rápidas</div>
+      <span class="ti-tag" style="background:rgba(251,191,36,.15);color:var(--draw)">⚠️ Adversário de peso</span>
+    </div>
+  </div>
+
+  <div class="team-info-card">
+    <div class="ti-flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div>
+    <div>
+      <div class="ti-name">Escócia</div>
+      <div class="ti-sub">Retorno à Copa após longa ausência<br>Física, competitiva e forte na bola parada</div>
+      <span class="ti-tag" style="background:rgba(255,255,255,.06);color:var(--muted)">⚔️ Moderada</span>
+    </div>
+  </div>
+
+  <div class="team-info-card" style="margin-bottom:20px">
+    <div class="ti-flag">🇭🇹</div>
+    <div>
+      <div class="ti-name">Haiti</div>
+      <div class="ti-sub">1ª participação em Copa do Mundo<br>Alta motivação, jogo rápido e veloz</div>
+      <span class="ti-tag" style="background:rgba(255,255,255,.06);color:var(--muted)">🔥 Estreante</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════ CALENDÁRIO ═══════════════════════ -->
+<section class="section" id="section-cal">
+
+  <div class="stitle">Calendário</div>
+  <div class="ssub">Todos os jogos</div>
+
+  <div class="cal-month">
+    <div class="cal-mhead">Maio 2026</div>
+    <div class="cal-wdays">
+      <div class="cal-wd">Dom</div><div class="cal-wd">Seg</div><div class="cal-wd">Ter</div>
+      <div class="cal-wd">Qua</div><div class="cal-wd">Qui</div><div class="cal-wd">Sex</div><div class="cal-wd">Sáb</div>
+    </div>
+    <div class="cal-days" id="cal-mai"></div>
+    <div class="legend">
+      <div class="legend-item"><div class="ldot" style="background:var(--green)"></div>Jogo do Brasil</div>
+      <div class="legend-item"><div class="ldot" style="background:var(--yellow)"></div>Hoje</div>
+      <div class="legend-item"><div class="ldot" style="background:rgba(255,255,255,.15)"></div>Jogo anterior</div>
+    </div>
+  </div>
+
+  <div class="cal-month">
+    <div class="cal-mhead">Junho 2026</div>
+    <div class="cal-wdays">
+      <div class="cal-wd">Dom</div><div class="cal-wd">Seg</div><div class="cal-wd">Ter</div>
+      <div class="cal-wd">Qua</div><div class="cal-wd">Qui</div><div class="cal-wd">Sex</div><div class="cal-wd">Sáb</div>
+    </div>
+    <div class="cal-days" id="cal-jun"></div>
+  </div>
+
+  <div class="cal-month">
+    <div class="cal-mhead">Julho 2026</div>
+    <div class="cal-wdays">
+      <div class="cal-wd">Dom</div><div class="cal-wd">Seg</div><div class="cal-wd">Ter</div>
+      <div class="cal-wd">Qua</div><div class="cal-wd">Qui</div><div class="cal-wd">Sex</div><div class="cal-wd">Sáb</div>
+    </div>
+    <div class="cal-days" id="cal-jul"></div>
+  </div>
+
+  <div class="stitle" style="margin-top:20px">Linha do Tempo</div>
+  <div class="ssub">Todos os compromissos em ordem</div>
+
+  <div id="timeline" style="margin-bottom:24px"></div>
+
+</section>
+
+</main>
+
+<script>
+// ────────────── DATA ──────────────
+const NEXT_GAME_DATE = new Date("2026-05-31T18:30:00-03:00");
+
+const TEAMS = [
+  {name:"Brasil",  flag:"🇧🇷", pts:0,pj:0,v:0,e:0,d:0,gp:0,gc:0},
+  {name:"Marrocos",flag:"🇲🇦", pts:0,pj:0,v:0,e:0,d:0,gp:0,gc:0},
+  {name:"Escócia", flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",pts:0,pj:0,v:0,e:0,d:0,gp:0,gc:0},
+  {name:"Haiti",   flag:"🇭🇹", pts:0,pj:0,v:0,e:0,d:0,gp:0,gc:0},
+];
+
+const GAME_DOTS = {
+  "2026-05-31": {flag:"🇵🇦",label:"vs Panamá",type:"upcoming"},
+  "2026-06-06": {flag:"🇪🇬",label:"vs Egito",type:"upcoming"},
+  "2026-06-13": {flag:"🇲🇦",label:"vs Marrocos · Rd 1",type:"upcoming"},
+  "2026-06-19": {flag:"🇭🇹",label:"vs Haiti · Rd 2",type:"upcoming"},
+  "2026-06-24": {flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",label:"vs Escócia · Rd 3",type:"upcoming"},
+  "2026-06-29": {flag:"❓",label:"Oitavas de Final",type:"tbd"},
+  "2026-07-04": {flag:"❓",label:"Quartas de Final",type:"tbd"},
+  "2026-07-09": {flag:"❓",label:"Semifinal",type:"tbd"},
+  "2026-07-19": {flag:"🏆",label:"Grande Final",type:"tbd"},
+};
+const PAST_DOTS = {
+  "2026-03-26": {flag:"🇫🇷",label:"vs França (1–2)"},
+  "2026-03-31": {flag:"🇭🇷",label:"vs Croácia (3–1)"},
+};
+
+const TIMELINE_GAMES = [
+  {phase:"Amistoso Internacional",date:"26 Mar", time:"21h", home:"🇧🇷 Brasil",away:"França 🇫🇷",score:"1–2",color:"var(--loss)"},
+  {phase:"Amistoso Internacional",date:"31 Mar", time:"21h", home:"🇧🇷 Brasil",away:"Croácia 🇭🇷",score:"3–1",color:"var(--win)"},
+  {phase:"Amistoso — Despedida", date:"31 Mai", time:"18h30",home:"🇧🇷 Brasil",away:"Panamá 🇵🇦",score:null,color:"var(--green)"},
+  {phase:"Amistoso — EUA",        date:"6 Jun",  time:"A conf.",home:"🇧🇷 Brasil",away:"Egito 🇪🇬",score:null,color:"var(--green)"},
+  {phase:"Grupo C · Rodada 1",   date:"13 Jun", time:"19h",   home:"🇧🇷 Brasil",away:"Marrocos 🇲🇦",score:null,color:"var(--green)"},
+  {phase:"Grupo C · Rodada 2",   date:"19 Jun", time:"21h30", home:"🇧🇷 Brasil",away:"Haiti 🇭🇹",score:null,color:"var(--green)"},
+  {phase:"Grupo C · Rodada 3",   date:"24 Jun", time:"19h",   home:"🇧🇷 Brasil",away:"Escócia 🏴󠁧󠁢󠁳󠁣󠁴󠁿",score:null,color:"var(--green)"},
+  {phase:"Oitavas de Final",      date:"29 Jun", time:"TBD",   home:"🇧🇷 Brasil",away:"A definir ❓",score:null,color:"var(--muted)"},
+  {phase:"Quartas de Final",      date:"~4 Jul", time:"TBD",   home:"🇧🇷 Brasil",away:"A definir ❓",score:null,color:"var(--muted)"},
+  {phase:"Semifinal",             date:"~9 Jul", time:"TBD",   home:"🇧🇷 Brasil",away:"A definir ❓",score:null,color:"var(--muted)"},
+  {phase:"🏆 Grande Final",       date:"19 Jul", time:"17h",   home:"🇧🇷 Brasil",away:"A definir ❓",score:null,color:"var(--yellow)"},
+];
+
+// ────────────── COUNTDOWN ──────────────
+function pad(n){return String(n).padStart(2,'0')}
+function tick(){
+  const diff=NEXT_GAME_DATE-Date.now();
+  if(diff<=0){['cd-d','cd-h','cd-m','cd-s'].forEach(id=>document.getElementById(id).textContent='00');return}
+  document.getElementById('cd-d').textContent=pad(Math.floor(diff/86400000));
+  document.getElementById('cd-h').textContent=pad(Math.floor((diff%86400000)/3600000));
+  document.getElementById('cd-m').textContent=pad(Math.floor((diff%3600000)/60000));
+  document.getElementById('cd-s').textContent=pad(Math.floor((diff%60000)/1000));
+}
+setInterval(tick,1000);tick();
+
+// ────────────── TABS ──────────────
+function showTab(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ────────────── GROUP TABLE ──────────────
+function renderGroup(){
+  const b=document.getElementById('gtbody');
+  b.innerHTML='';
+  TEAMS.forEach((t,i)=>{
+    const sg=t.gp-t.gc;
+    const q=i<2;
+    const tr=document.createElement('tr');
+    if(t.name==='Brasil')tr.className='hl';
+    tr.innerHTML=`
+      <td>${q?'<div class="qbar"></div>':''} ${i+1}</td>
+      <td class="tname"><span style="margin-right:6px">${t.flag}</span>${t.name}</td>
+      <td>${t.pj}</td><td>${t.v}</td><td>${t.e}</td><td>${t.d}</td>
+      <td>${t.gp}</td><td>${t.gc}</td>
+      <td style="color:${sg>=0?'var(--win)':'var(--loss)'}">${sg>=0?'+'+sg:sg}</td>
+      <td class="pts">${t.pts}</td>
+    `;
+    b.appendChild(tr);
+  });
+}
+renderGroup();
+
+// ────────────── CALENDAR ──────────────
+const TODAY=new Date();
+function renderCal(containerId,year,month){
+  const el=document.getElementById(containerId);
+  if(!el)return;
+  const first=new Date(year,month-1,1).getDay();
+  const total=new Date(year,month,0).getDate();
+  let html='';
+  for(let i=0;i<first;i++)html+='<div class="cal-day empty"></div>';
+  for(let d=1;d<=total;d++){
+    const ds=`${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isToday=d===TODAY.getDate()&&month===TODAY.getMonth()+1&&year===TODAY.getFullYear();
+    const gd=GAME_DOTS[ds];const pg=PAST_DOTS[ds];
+    let cls='cal-day';
+    if(isToday)cls+=' today';
+    else if(gd)cls+=' has-game';
+    else if(pg)cls+=' past-game';
+    const title=gd?gd.label:pg?pg.label:'';
+    html+=`<div class="${cls}" title="${title}">
+      <span>${d}</span>
+      ${gd?`<span class="cal-df">${gd.flag}</span>`:''}
+      ${pg&&!gd?`<span class="cal-df">${pg.flag}</span>`:''}
+    </div>`;
+  }
+  el.innerHTML=html;
+}
+renderCal('cal-mai',2026,5);
+renderCal('cal-jun',2026,6);
+renderCal('cal-jul',2026,7);
+
+// ────────────── TIMELINE ──────────────
+function renderTimeline(){
+  const el=document.getElementById('timeline');
+  let html='';
+  TIMELINE_GAMES.forEach((g,i)=>{
+    const isLast=i===TIMELINE_GAMES.length-1;
+    const scoreHtml=g.score
+      ?`<span style="font-weight:700;color:${g.color};margin:0 5px">${g.score}</span>`
+      :`<span style="color:var(--muted);margin:0 6px">vs</span>`;
+    html+=`<div class="tl-item">
+      <div class="tl-dot-col">
+        <div class="tl-dot" style="background:${g.color}"></div>
+        ${isLast?'':'<div class="tl-line"></div>'}
+      </div>
+      <div class="tl-card">
+        <div class="tl-phase">${g.phase}</div>
+        <div class="tl-match">${g.home}${scoreHtml}${g.away}</div>
+        <div class="tl-meta">📅 ${g.date} &nbsp;⏰ ${g.time}</div>
+      </div>
+    </div>`;
+  });
+  el.innerHTML=html;
+}
+renderTimeline();
+</script>
+</body>
+</html>
