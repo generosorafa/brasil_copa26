@@ -1292,31 +1292,28 @@ FALLBACK.forEach((fb,i)=>{
   if(el) el.innerHTML=`<span class="climate-icon">🌡️</span><span>${fb.t}</span><span class="climate-icon">💧</span><span>${fb.r}% chuva</span><span style="color:rgba(238,243,255,.3);font-size:9px">· ${fb.c}</span>`;
 });
 
-async function fetchWeather(){
-  for(let i=0;i<VENUES.length;i++){
-    const v=VENUES[i];
-    try{
-      const url=`https://api.open-meteo.com/v1/forecast?latitude=${v.lat}&longitude=${v.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=auto&forecast_days=35`;
-      const r=await fetch(url); if(!r.ok) continue;
-      const d=await r.json();
-      const idx=d.daily.time.indexOf(v.dateStr);
-      if(idx<0) continue;
-      const tmax=Math.round(d.daily.temperature_2m_max[idx]);
-      const tmin=Math.round(d.daily.temperature_2m_min[idx]);
-      const rain=d.daily.precipitation_probability_max[idx]??0;
-      const wcode=d.daily.weathercode[idx];
-      const cond=WMO[wcode]||'🌤️ Variável';
-      document.getElementById(v.elTemp).textContent=tmax+'°C';
-      document.getElementById(v.elMin).textContent=tmin+'°C';
-      document.getElementById(v.elCond).textContent=cond;
-      document.getElementById(v.elRain).textContent=rain+'%';
-      document.getElementById(v.elBar).style.width=rain+'%';
-      const strip=document.getElementById(v.el);
-      if(strip) strip.innerHTML=`<span class="climate-icon">🌡️</span><span>${tmax}°C</span><span class="climate-icon">💧</span><span>${rain}% chuva</span><span style="color:rgba(238,243,255,.3);font-size:9px">· ${cond.split(' ').slice(1).join(' ')}</span>`;
-    }catch(e){}
-  }
+function loadStaticWeather(){
+  // Static climate averages for game cities in June/July - based on historical data
+  const climates = [
+    {temp:"27",min:"17",cond:"⛅ Parcialmente Nublado",rain:40,   note:"Média histórica · Nova Jersey, Jun"},
+    {temp:"28",min:"19",cond:"🌤️ Maioria Ensolarado",  rain:43,   note:"Média histórica · Filadélfia, Jun"},
+    {temp:"32",min:"26",cond:"🌦️ Aguaceiros à tarde",  rain:62,   note:"Média histórica · Miami, Jun"},
+  ];
+  const stripIds=[["clima-nj","temp-nj","min-nj","cond-nj","rain-nj","bar-nj"],
+                  ["clima-phi","temp-phi","min-phi","cond-phi","rain-phi","bar-phi"],
+                  ["clima-mia","temp-mia","min-mia","cond-mia","rain-mia","bar-mia"]];
+  climates.forEach((c,i)=>{
+    const ids=stripIds[i];
+    const strip=document.getElementById(ids[0]);
+    if(strip) strip.innerHTML=`<span class="climate-icon">🌡️</span><span>${c.temp}°C</span><span class="climate-icon">💧</span><span>${c.rain}% chuva</span><span style="color:rgba(238,243,255,.3);font-size:9px">· ${c.note}</span>`;
+    const tEl=document.getElementById(ids[1]); if(tEl) tEl.textContent=c.temp+'°C';
+    const mEl=document.getElementById(ids[2]); if(mEl) mEl.textContent=c.min+'°C';
+    const cEl=document.getElementById(ids[3]); if(cEl) cEl.textContent=c.cond;
+    const rEl=document.getElementById(ids[4]); if(rEl) rEl.textContent=c.rain+'%';
+    const bEl=document.getElementById(ids[5]); if(bEl) bEl.style.width=c.rain+'%';
+  });
 }
-setTimeout(fetchWeather,800);
+loadStaticWeather();
 
 // ── .ICS DOWNLOAD ──
 function downloadICS(title,start,end,location,url){
@@ -1455,53 +1452,79 @@ function closeSheet(){
 // ── ELENCO WITH FIGURINHAS ──
 const PLAYERS2 = {
   "Goleiros":{pos:"GK",players:[
-    {n:1,  name:"Alisson",          club:"Liverpool",     clubId:44,   pid:209328, flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-    {n:12, name:"Ederson",          club:"Fenerbahçe",    clubId:2672, pid:144666, flag:"🇹🇷"},
-    {n:23, name:"Weverton",         club:"Grêmio",        clubId:1971, pid:68659,  flag:"🇧🇷"},
+    {n:1,  name:"Alisson",          club:"Liverpool",   clubId:44,   wiki:"Alisson_Becker",                    flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:12, name:"Ederson",          club:"Fenerbahçe",  clubId:2672, wiki:"Ederson_(footballer,_born_1993)",   flag:"🇹🇷"},
+    {n:23, name:"Weverton",         club:"Grêmio",      clubId:1971, wiki:"Weverton_Pereira",                  flag:"🇧🇷"},
   ]},
   "Defensores":{pos:"DEF",players:[
-    {n:2,  name:"Alex Sandro",      club:"Flamengo",      clubId:1960, pid:19462,  flag:"🇧🇷"},
-    {n:3,  name:"Bremer",           club:"Juventus",      clubId:2687, pid:780692, flag:"🇮🇹"},
-    {n:4,  name:"Danilo",           club:"Flamengo",      clubId:1960, pid:99035,  flag:"🇧🇷"},
-    {n:5,  name:"Douglas Santos",   club:"Zenit",         clubId:2717, pid:269596, flag:"🇷🇺"},
-    {n:6,  name:"Gabriel Magalhães",club:"Arsenal",       clubId:42,   pid:856116, flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-    {n:14, name:"Ibañez",           club:"Al-Ahli",       clubId:5068, pid:755879, flag:"🇸🇦"},
-    {n:13, name:"Léo Pereira",      club:"Flamengo",      clubId:1960, pid:394283, flag:"🇧🇷"},
-    {n:15, name:"Marquinhos",       club:"PSG",           clubId:1644, pid:106299, flag:"🇫🇷"},
-    {n:22, name:"Wesley",           club:"Roma",          clubId:84,   pid:1143709,flag:"🇮🇹"},
+    {n:2,  name:"Alex Sandro",      club:"Flamengo",    clubId:1960, wiki:"Alex_Sandro",                       flag:"🇧🇷"},
+    {n:3,  name:"Bremer",           club:"Juventus",    clubId:2687, wiki:"Gleison_Bremer",                    flag:"🇮🇹"},
+    {n:4,  name:"Danilo",           club:"Flamengo",    clubId:1960, wiki:"Danilo_(footballer,_born_1991)",    flag:"🇧🇷"},
+    {n:5,  name:"Douglas Santos",   club:"Zenit",       clubId:2717, wiki:"Douglas_Santos_(footballer)",       flag:"🇷🇺"},
+    {n:6,  name:"Gabriel Magalhães",club:"Arsenal",     clubId:42,   wiki:"Gabriel_Magalhães",                 flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:14, name:"Ibañez",           club:"Al-Ahli",     clubId:5068, wiki:"Arthur_Ituassu",                    flag:"🇸🇦"},
+    {n:13, name:"Léo Pereira",      club:"Flamengo",    clubId:1960, wiki:"Léo_Pereira_(footballer)",         flag:"🇧🇷"},
+    {n:15, name:"Marquinhos",       club:"PSG",         clubId:1644, wiki:"Marquinhos_(footballer)",           flag:"🇫🇷"},
+    {n:22, name:"Wesley",           club:"Roma",        clubId:84,   wiki:"Wesley_(Brazilian_footballer,_born_2003)", flag:"🇮🇹"},
   ]},
   "Meio-campistas":{pos:"MID",players:[
-    {n:8,  name:"Bruno Guimarães",  club:"Newcastle",     clubId:39,   pid:903886, flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-    {n:16, name:"Casemiro",         club:"Man. United",   clubId:35,   pid:73459,  flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-    {n:17, name:"Danilo Santos",    club:"Botafogo",      clubId:1963, pid:1009218,flag:"🇧🇷"},
-    {n:18, name:"Fabinho",          club:"Al-Ittihad",    clubId:2834, pid:114605, flag:"🇸🇦"},
-    {n:10, name:"Paquetá",          club:"Flamengo",      clubId:1960, pid:795526, flag:"🇧🇷"},
+    {n:8,  name:"Bruno Guimarães",  club:"Newcastle",   clubId:39,   wiki:"Bruno_Guimarães",                   flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:16, name:"Casemiro",         club:"Man. United", clubId:35,   wiki:"Casemiro",                          flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:17, name:"Danilo Santos",    club:"Botafogo",    clubId:1963, wiki:"Danilo_Santos_(footballer)",        flag:"🇧🇷"},
+    {n:18, name:"Fabinho",          club:"Al-Ittihad",  clubId:2834, wiki:"Fabinho_(footballer,_born_1993)",   flag:"🇸🇦"},
+    {n:10, name:"Paquetá",          club:"Flamengo",    clubId:1960, wiki:"Lucas_Paquetá",                     flag:"🇧🇷"},
   ]},
   "Atacantes":{pos:"FWD",players:[
-    {n:9,  name:"Endrick",          club:"Lyon",          clubId:1649, pid:1358539,flag:"🇫🇷"},
-    {n:11, name:"Martinelli",       club:"Arsenal",       clubId:42,   pid:895528, flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-    {n:19, name:"Igor Thiago",      club:"Brentford",     clubId:55,   pid:1025735,flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-    {n:21, name:"Luiz Henrique",    club:"Zenit",         clubId:2717, pid:912042, flag:"🇷🇺"},
-    {n:7,  name:"Matheus Cunha",    club:"Man. United",   clubId:35,   pid:878820, flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-    {n:10, name:"Neymar Jr.",       club:"Santos",        clubId:1977, pid:171386, flag:"🇧🇷",star:true},
-    {n:20, name:"Raphinha",         club:"Barcelona",     clubId:2817, pid:766591, flag:"🇪🇸"},
-    {n:26, name:"Rayan",            club:"Bournemouth",   clubId:40,   pid:1597532,flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-    {n:7,  name:"Vini Jr.",         club:"Real Madrid",   clubId:2829, pid:949985, flag:"🇪🇸",star:true},
+    {n:9,  name:"Endrick",          club:"Lyon",        clubId:1649, wiki:"Endrick_(footballer)",              flag:"🇫🇷"},
+    {n:11, name:"Martinelli",       club:"Arsenal",     clubId:42,   wiki:"Gabriel_Martinelli",                flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:19, name:"Igor Thiago",      club:"Brentford",   clubId:55,   wiki:"Igor_Thiago",                       flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:21, name:"Luiz Henrique",    club:"Zenit",       clubId:2717, wiki:"Luiz_Henrique_(footballer,_born_2001)", flag:"🇷🇺"},
+    {n:7,  name:"Matheus Cunha",    club:"Man. United", clubId:35,   wiki:"Matheus_Cunha",                     flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:10, name:"Neymar Jr.",       club:"Santos",      clubId:1977, wiki:"Neymar",                            flag:"🇧🇷", star:true},
+    {n:20, name:"Raphinha",         club:"Barcelona",   clubId:2817, wiki:"Raphinha",                          flag:"🇪🇸"},
+    {n:26, name:"Rayan",            club:"Bournemouth", clubId:40,   wiki:"Rayan_(footballer)",                flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:7,  name:"Vini Jr.",         club:"Real Madrid", clubId:2829, wiki:"Vinícius_Júnior",                   flag:"🇪🇸", star:true},
   ]},
 };
 
 function initials(name){return name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}
 
+function initials(name){return name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}
+
+const WIKI_CACHE = {};
+async function loadWikiPhoto(slug, imgEl, fallbackEl) {
+  if(!slug){imgEl.style.display='none';fallbackEl.style.display='flex';return;}
+  try {
+    const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(slug.replace(/_/g,' '))}`;
+    const r = await fetch(url);
+    if(!r.ok) throw new Error();
+    const d = await r.json();
+    const src = d?.thumbnail?.source;
+    if(src){
+      // bump resolution: replace size like 320px with 500px
+      const hires = src.replace(/\/\d+px-/, '/500px-');
+      imgEl.onload = () => { fallbackEl.style.display='none'; };
+      imgEl.onerror = () => { imgEl.style.display='none'; fallbackEl.style.display='flex'; };
+      imgEl.src = hires;
+    } else throw new Error();
+  } catch(e){
+    imgEl.style.display='none';
+    fallbackEl.style.display='flex';
+  }
+}
+
 function renderElenco2(){
   const el=document.getElementById('elenco-content'); if(!el) return;
-  let html='';
   const IMG='https://api.sofascore.app/api/v1';
+  let html='';
   Object.entries(PLAYERS2).forEach(([pos,{pos:posBadge,players}])=>{
     html+=`<div class="pos-section-head">${pos} <span class="pos-count">(${players.length})</span></div><div class="fig-grid">`;
-    players.forEach(p=>{
+    players.forEach((p,idx)=>{
       const starCls=p.star?' fig-star':'';
       const starBadge=p.star?'<div class="fig-star-badge">⭐ ESTRELA</div>':'';
       const ini=initials(p.name);
+      const pos_flat = pos.toLowerCase().replace(/[^a-z]/g,'');
+      const dataId = `${pos_flat}-${idx}`;
       html+=`<div class="fig-card${starCls}">
         ${starBadge}
         <div class="fig-head">
@@ -1509,10 +1532,9 @@ function renderElenco2(){
           <span class="fig-pos-badge">${posBadge}</span>
         </div>
         <div class="fig-photo-wrap">
-          <img class="fig-photo" 
-               src="${IMG}/player/${p.pid}/image"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="fig-initials" style="display:none">${ini}</div>
+          <img class="fig-photo" id="wimg-${dataId}" src="" style="display:none"
+               alt="${p.name}">
+          <div class="fig-initials" id="wini-${dataId}" style="display:flex">${ini}</div>
         </div>
         <div class="fig-info">
           <div class="fig-name">${p.name}</div>
@@ -1529,9 +1551,18 @@ function renderElenco2(){
     html+='</div>';
   });
   el.innerHTML=html;
-}
-if(document.getElementById("elenco-content")) renderElenco2();
 
+  // Now async-load Wikipedia photos
+  Object.entries(PLAYERS2).forEach(([pos,{players}])=>{
+    const pos_flat = pos.toLowerCase().replace(/[^a-z]/g,'');
+    players.forEach((p,idx)=>{
+      const dataId=`${pos_flat}-${idx}`;
+      const imgEl=document.getElementById(`wimg-${dataId}`);
+      const iniEl=document.getElementById(`wini-${dataId}`);
+      if(imgEl && iniEl && p.wiki) loadWikiPhoto(p.wiki, imgEl, iniEl);
+    });
+  });
+}
 </script>
 </body>
 </html>
