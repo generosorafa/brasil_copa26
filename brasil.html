@@ -301,6 +301,167 @@ td.pts{font-weight:700;font-size:15px;color:var(--yellow)}
 
 @media(min-width:480px){.hero-flag{font-size:50px}.hero-name{font-size:20px}.player-grid{grid-template-columns:1fr 1fr 1fr}}
 @media(min-width:700px){body{padding-bottom:0}main{max-width:680px;margin:0 auto}.tab-nav{position:sticky;top:0;order:-1;border-top:none;border-bottom:1px solid var(--border);max-width:680px;margin:0 auto}}
+
+/* ── FIGURINHA CARDS ── */
+.fig-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px}
+@media(min-width:520px){.fig-grid{grid-template-columns:1fr 1fr 1fr}}
+
+.fig-card{
+  border-radius:14px;overflow:hidden;position:relative;
+  background:linear-gradient(175deg,rgba(0,39,118,.55) 0%,rgba(0,156,59,.18) 100%);
+  border:1px solid rgba(255,255,255,.10);
+  transition:transform .15s,box-shadow .15s;
+}
+.fig-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.fig-card.fig-star{
+  border-color:rgba(255,223,0,.45);
+  background:linear-gradient(175deg,rgba(0,39,118,.6) 0%,rgba(255,223,0,.12) 100%);
+  box-shadow:0 0 18px rgba(255,223,0,.08);
+}
+
+.fig-head{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 9px 0;}
+.fig-num{font-family:'Bebas Neue',sans-serif;font-size:26px;color:rgba(255,223,0,.2);line-height:1}
+.fig-card.fig-star .fig-num{color:rgba(255,223,0,.45)}
+.fig-pos-badge{font-size:8px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.07);color:var(--muted);margin-top:4px;}
+
+.fig-photo-wrap{
+  position:relative;width:100%;
+  /* 4:5 ratio = figurinha sticker */
+  padding-bottom:125%;
+  overflow:hidden;margin-top:4px;
+}
+.fig-photo{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  object-fit:cover;object-position:top center;
+}
+.fig-initials{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:52px;
+  color:rgba(255,223,0,.15);background:rgba(0,0,0,.12);
+}
+/* shimmer while loading */
+.fig-photo-wrap::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.04) 50%,transparent 100%);
+  animation:shimmer 1.6s infinite;pointer-events:none;
+}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+.fig-info{padding:7px 9px 9px;background:rgba(0,0,0,.4);}
+.fig-name{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.5px;line-height:1.15;margin-bottom:4px}
+.fig-card.fig-star .fig-name{color:var(--yellow)}
+.fig-club-row{display:flex;align-items:center;gap:5px;}
+.fig-club-logo{width:18px;height:18px;object-fit:contain;flex-shrink:0}
+.fig-club-name{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.fig-country{font-size:11px;margin-left:auto;flex-shrink:0}
+.fig-star-badge{
+  position:absolute;top:8px;right:8px;
+  background:var(--yellow);color:#000;
+  font-size:7px;font-weight:900;letter-spacing:1px;
+  padding:2px 5px;border-radius:4px;z-index:2;
+}
+
+.pos-section-head{
+  font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px;
+  color:var(--muted);text-transform:uppercase;
+  margin:20px 0 10px;display:flex;align-items:center;gap:8px;
+}
+.pos-section-head::after{content:'';flex:1;height:1px;background:var(--border)}
+.pos-count{font-family:'Outfit',sans-serif;font-size:11px;font-weight:400;letter-spacing:0}
+
+/* ── CALENDAR IMPROVEMENTS ── */
+.cal-view-toggle{
+  display:flex;gap:6px;margin-bottom:12px;
+  background:rgba(0,0,0,.3);border:1px solid var(--border);
+  border-radius:10px;padding:4px;
+}
+.cal-vbtn{
+  flex:1;padding:7px;border:none;border-radius:7px;
+  background:transparent;color:var(--muted);
+  font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;
+  cursor:pointer;transition:all .18s;
+}
+.cal-vbtn.active{background:rgba(255,255,255,.08);color:var(--text)}
+
+/* phase legend */
+.cal-legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+.cal-leg-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)}
+.cal-leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* updated cal-day types */
+.cal-day.amistoso{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:var(--text);cursor:pointer}
+.cal-day.grupo{background:rgba(0,156,59,.18);border-color:rgba(0,196,74,.5);color:var(--green2);cursor:pointer}
+.cal-day.matamata{background:rgba(255,223,0,.1);border-color:rgba(255,223,0,.4);color:var(--yellow);cursor:pointer}
+.cal-day.amistoso:hover{background:rgba(255,255,255,.12)}
+.cal-day.grupo:hover{background:rgba(0,156,59,.28)}
+.cal-day.matamata:hover{background:rgba(255,223,0,.18)}
+.cal-day.past-game{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.07);color:rgba(238,243,255,.3)}
+.cal-day-time{font-size:6.5px;line-height:1;margin-top:1px;font-weight:600;letter-spacing:.2px}
+
+/* AGENDA VIEW */
+.agenda-view{display:none}
+.agenda-view.show{display:block}
+.cal-grid-wrap.hide{display:none}
+.agenda-item{
+  display:flex;gap:10px;align-items:stretch;margin-bottom:8px;cursor:pointer;
+}
+.agenda-date{
+  flex-shrink:0;width:46px;background:var(--card);border:1px solid var(--border);
+  border-radius:10px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:6px 4px;
+}
+.ag-day{font-family:'Bebas Neue',sans-serif;font-size:22px;line-height:1}
+.ag-mon{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:1px}
+.agenda-card{
+  flex:1;border-radius:10px;padding:10px 12px;
+  display:flex;flex-direction:column;justify-content:center;gap:4px;
+  border:1px solid var(--border);background:var(--card);transition:background .15s;
+}
+.agenda-card:hover{background:var(--card2)}
+.agenda-card.ag-amistoso{border-left:3px solid rgba(255,255,255,.25)}
+.agenda-card.ag-grupo{border-left:3px solid var(--green)}
+.agenda-card.ag-mata{border-left:3px solid var(--yellow)}
+.agenda-card.ag-past{opacity:.4}
+.ag-phase{font-size:8.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.ag-match{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.5px}
+.ag-meta{font-size:10px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}
+
+/* BOTTOM SHEET */
+.cal-sheet-overlay{
+  position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.65);
+  backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.cal-sheet-overlay.show{opacity:1;pointer-events:all}
+.cal-sheet{
+  position:fixed;bottom:0;left:0;right:0;z-index:201;
+  background:#0E1F35;border-top:1px solid var(--border);
+  border-radius:20px 20px 0 0;
+  padding:0 16px max(20px,env(safe-area-inset-bottom));
+  transform:translateY(100%);transition:transform .3s cubic-bezier(.22,1,.36,1);
+  max-height:75vh;overflow-y:auto;
+}
+.cal-sheet.show{transform:translateY(0)}
+.sheet-handle{width:36px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:12px auto 16px}
+.sheet-phase{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.sheet-teams{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.sheet-team{flex:1;text-align:center}
+.sheet-flag{font-size:40px;display:block;margin-bottom:5px}
+.sheet-tname{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px}
+.sheet-vs{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--yellow);text-align:center;min-width:52px}
+.sheet-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.sheet-meta-item{background:rgba(255,255,255,.04);border-radius:10px;padding:10px 12px}
+.smi-label{font-size:8.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.smi-val{font-size:13px;font-weight:600}
+.sheet-actions{display:flex;gap:8px}
+.sheet-actions a,.sheet-actions button{
+  flex:1;padding:12px;border-radius:11px;font-family:'Outfit',sans-serif;
+  font-size:12px;font-weight:700;text-decoration:none;text-align:center;
+  cursor:pointer;border:none;
+}
+.sa-caze{background:#CC0000;color:#fff}
+.sa-ics{background:rgba(255,223,0,.12);border:1px solid rgba(255,223,0,.25)!important;color:var(--yellow);border:none}
 </style>
 </head>
 <body>
@@ -710,18 +871,47 @@ td.pts{font-weight:700;font-size:15px;color:var(--yellow)}
 
 <!-- ══════════ CALENDÁRIO ══════════ -->
 <section class="section" id="section-cal">
-  <div class="stitle">Calendário</div><div class="ssub">Todos os compromissos</div>
-  <div class="cal-month"><div class="cal-mhead">Maio 2026</div><div class="cal-wdays"><div class="cal-wd">Dom</div><div class="cal-wd">Seg</div><div class="cal-wd">Ter</div><div class="cal-wd">Qua</div><div class="cal-wd">Qui</div><div class="cal-wd">Sex</div><div class="cal-wd">Sáb</div></div><div class="cal-days" id="cal-mai"></div><div class="legend"><div class="legend-item"><div class="ldot" style="background:var(--green)"></div>Jogo do Brasil</div><div class="legend-item"><div class="ldot" style="background:var(--yellow)"></div>Hoje</div><div class="legend-item"><div class="ldot" style="background:rgba(255,255,255,.15)"></div>Finalizado</div></div></div>
-  <div class="cal-month"><div class="cal-mhead">Junho 2026</div><div class="cal-wdays"><div class="cal-wd">Dom</div><div class="cal-wd">Seg</div><div class="cal-wd">Ter</div><div class="cal-wd">Qua</div><div class="cal-wd">Qui</div><div class="cal-wd">Sex</div><div class="cal-wd">Sáb</div></div><div class="cal-days" id="cal-jun"></div></div>
-  <div class="cal-month"><div class="cal-mhead">Julho 2026</div><div class="cal-wdays"><div class="cal-wd">Dom</div><div class="cal-wd">Seg</div><div class="cal-wd">Ter</div><div class="cal-wd">Qua</div><div class="cal-wd">Qui</div><div class="cal-wd">Sex</div><div class="cal-wd">Sáb</div></div><div class="cal-days" id="cal-jul"></div></div>
-  <div class="stitle" style="margin-top:18px">Linha do Tempo</div><div class="ssub">Do amistoso à final</div>
-  <div id="timeline" style="margin-bottom:24px"></div>
+  <div class="stitle">Calendário</div>
+  <div class="ssub">Todos os compromissos</div>
+
+  <!-- view toggle -->
+  <div class="cal-view-toggle">
+    <button class="cal-vbtn active" id="vbtn-grid" onclick="calView('grid')">📅 Calendário</button>
+    <button class="cal-vbtn" id="vbtn-agenda" onclick="calView('agenda')">📋 Agenda</button>
+  </div>
+
+  <!-- phase legend -->
+  <div class="cal-legend">
+    <div class="cal-leg-item"><div class="cal-leg-dot" style="background:rgba(255,255,255,.3)"></div>Amistoso</div>
+    <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--green2)"></div>Fase de Grupos</div>
+    <div class="cal-leg-item"><div class="cal-leg-dot" style="background:var(--yellow)"></div>Mata-Mata</div>
+    <div class="cal-leg-item"><div class="cal-leg-dot" style="background:rgba(255,255,255,.12)"></div>Finalizado</div>
+  </div>
+
+  <!-- grid view -->
+  <div id="cal-grid-wrap" class="cal-grid-wrap">
+    <div class="cal-month"><div class="cal-mhead">Março 2026</div><div class="cal-wdays"><div class="cal-wd">Dom</div><div class="cal-wd">Seg</div><div class="cal-wd">Ter</div><div class="cal-wd">Qua</div><div class="cal-wd">Qui</div><div class="cal-wd">Sex</div><div class="cal-wd">Sáb</div></div><div class="cal-days" id="cal-mar"></div></div>
+    <div class="cal-month"><div class="cal-mhead">Maio 2026</div><div class="cal-wdays"><div class="cal-wd">Dom</div><div class="cal-wd">Seg</div><div class="cal-wd">Ter</div><div class="cal-wd">Qua</div><div class="cal-wd">Qui</div><div class="cal-wd">Sex</div><div class="cal-wd">Sáb</div></div><div class="cal-days" id="cal-mai"></div></div>
+    <div class="cal-month"><div class="cal-mhead">Junho 2026</div><div class="cal-wdays"><div class="cal-wd">Dom</div><div class="cal-wd">Seg</div><div class="cal-wd">Ter</div><div class="cal-wd">Qua</div><div class="cal-wd">Qui</div><div class="cal-wd">Sex</div><div class="cal-wd">Sáb</div></div><div class="cal-days" id="cal-jun"></div></div>
+    <div class="cal-month"><div class="cal-mhead">Julho 2026</div><div class="cal-wdays"><div class="cal-wd">Dom</div><div class="cal-wd">Seg</div><div class="cal-wd">Ter</div><div class="cal-wd">Qua</div><div class="cal-wd">Qui</div><div class="cal-wd">Sex</div><div class="cal-wd">Sáb</div></div><div class="cal-days" id="cal-jul"></div></div>
+  </div>
+
+  <!-- agenda view -->
+  <div id="agenda-view" class="agenda-view"></div>
+
 </section>
+
+<!-- BOTTOM SHEET -->
+<div class="cal-sheet-overlay" id="sheetOverlay" onclick="closeSheet()"></div>
+<div class="cal-sheet" id="calSheet">
+  <div class="sheet-handle"></div>
+  <div id="sheetContent"></div>
+</div>
 
 <!-- ══════════ ELENCO ══════════ -->
 <section class="section" id="section-elenco">
   <div class="stitle">Elenco</div>
-  <div class="ssub">26 Convocados · Copa 2026</div>
+  <div class="ssub">26 Convocados · Copa 2026 · Ancelotti</div>
   <div id="elenco-content"></div>
 </section>
 
@@ -946,7 +1136,7 @@ const TEAMS = [
   {name:"Haiti",   flag:"🇭🇹",pts:0,pj:0,v:0,e:0,d:0,gp:0,gc:0},
 ];
 function renderGroup(){
-  const b = document.getElementById('gtbody'); b.innerHTML='';
+  const b = document.getElementById('gtbody'); if(!b) return; b.innerHTML='';
   TEAMS.forEach((t,i) => {
     const sg = t.gp-t.gc, q = i<2;
     const tr = document.createElement('tr');
@@ -1000,9 +1190,6 @@ function renderCal(cid,y,m){
   }
   el.innerHTML=html;
 }
-renderCal('cal-mai',2026,5);
-renderCal('cal-jun',2026,6);
-renderCal('cal-jul',2026,7);
 
 // ── TIMELINE ──
 const TL=[
@@ -1020,7 +1207,7 @@ const TL=[
   {ph:"🏆 Grande Final · MetLife Stadium, NJ",date:"19 Jul",time:"16h",h:"🇧🇷 Brasil",a:"Adversário ❓",sc:null,col:"var(--yellow)"},
 ];
 function renderTimeline(){
-  const el=document.getElementById('timeline'); let html='';
+  const el=document.getElementById('timeline'); if(!el) return; let html='';
   TL.forEach((g,i)=>{
     const last=i===TL.length-1;
     const sc=g.sc?`<span style="font-weight:700;color:${g.col};margin:0 4px">${g.sc}</span>`:`<span style="color:var(--muted);margin:0 5px">vs</span>`;
@@ -1084,7 +1271,6 @@ function renderElenco(){
   });
   el.innerHTML=html;
 }
-renderElenco();
 
 // ── WEATHER (Open-Meteo API + fallback) ──
 const VENUES = [
@@ -1142,6 +1328,210 @@ function downloadICS(title,start,end,location,url){
   a.download=title.replace(/[^a-zA-Z0-9]/g,'-')+'.ics';
   a.click();
 }
+
+
+// ── CALENDAR DATA WITH TIMES ──
+const CAL_GAMES = {
+  "2026-03-26":{flag:"🇫🇷",label:"vs França",time:"21h",phase:"amistoso",venue:"Gillette Stadium, Boston",cazeLink:"http://youtube.com/@CazeTV",past:true,score:"1–2"},
+  "2026-03-31":{flag:"🇭🇷",label:"vs Croácia",time:"21h",phase:"amistoso",venue:"Camping World Stadium, Orlando",cazeLink:"http://youtube.com/@CazeTV",past:true,score:"3–1"},
+  "2026-05-31":{flag:"🇵🇦",label:"vs Panamá",time:"18h30",phase:"amistoso",venue:"Maracanã, Rio de Janeiro",cazeLink:"http://youtube.com/@CazeTV",icsStart:"20260531T213000Z",icsEnd:"20260531T233000Z"},
+  "2026-06-06":{flag:"🇪🇬",label:"vs Egito",time:"A conf.",phase:"amistoso",venue:"Huntington Bank Field, Cleveland",cazeLink:"http://youtube.com/@CazeTV",icsStart:"20260606T210000Z",icsEnd:"20260606T230000Z"},
+  "2026-06-13":{flag:"🇲🇦",label:"vs Marrocos",time:"19h",phase:"grupo",venue:"MetLife Stadium, Nova Jersey",cazeLink:"https://www.youtube.com/watch?v=vC3fV_awcWE",icsStart:"20260613T220000Z",icsEnd:"20260614T000000Z"},
+  "2026-06-19":{flag:"🇭🇹",label:"vs Haiti",time:"21h30",phase:"grupo",venue:"Lincoln Financial Field, Filadélfia",cazeLink:"https://www.youtube.com/watch?v=DUuWdi0r1RI",icsStart:"20260620T003000Z",icsEnd:"20260620T023000Z"},
+  "2026-06-24":{flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",label:"vs Escócia",time:"19h",phase:"grupo",venue:"Hard Rock Stadium, Miami",cazeLink:"https://www.youtube.com/watch?v=dxYTTxhgVNU",icsStart:"20260624T220000Z",icsEnd:"20260625T000000Z"},
+  "2026-06-29":{flag:"❓",label:"16-avos de Final",time:"14h / 22h",phase:"matamata",venue:"Houston (1º) / Monterrey (2º)",cazeLink:"http://youtube.com/@CazeTV",icsStart:"20260629T170000Z",icsEnd:"20260629T190000Z"},
+  "2026-07-04":{flag:"❓",label:"Oitavas (poss. A)",time:"16h",phase:"matamata",venue:"Lincoln Financial Field, Filadélfia",cazeLink:"http://youtube.com/@CazeTV",icsStart:"20260704T190000Z",icsEnd:"20260704T210000Z"},
+  "2026-07-05":{flag:"❓",label:"Oitavas (poss. B)",time:"19h",phase:"matamata",venue:"A definir, EUA",cazeLink:"http://youtube.com/@CazeTV",icsStart:"20260705T220000Z",icsEnd:"20260706T000000Z"},
+  "2026-07-09":{flag:"❓",label:"Quartas (poss. A)",time:"17h",phase:"matamata",venue:"Gillette Stadium, Boston",cazeLink:"http://youtube.com/@CazeTV",icsStart:"20260709T200000Z",icsEnd:"20260709T220000Z"},
+  "2026-07-11":{flag:"❓",label:"Quartas (poss. B)",time:"18h",phase:"matamata",venue:"A definir, EUA/México",cazeLink:"http://youtube.com/@CazeTV",icsStart:"20260711T210000Z",icsEnd:"20260711T230000Z"},
+  "2026-07-14":{flag:"❓",label:"Semifinal (poss. A)",time:"16h",phase:"matamata",venue:"A definir, EUA",cazeLink:"http://youtube.com/@CazeTV",icsStart:"20260714T190000Z",icsEnd:"20260714T210000Z"},
+  "2026-07-15":{flag:"❓",label:"Semifinal (poss. B)",time:"16h",phase:"matamata",venue:"A definir, EUA",cazeLink:"http://youtube.com/@CazeTV",icsStart:"20260715T190000Z",icsEnd:"20260715T210000Z"},
+  "2026-07-19":{flag:"🏆",label:"Grande Final",time:"16h",phase:"matamata",venue:"MetLife Stadium, Nova Jersey",cazeLink:"http://youtube.com/@CazeTV",icsStart:"20260719T190000Z",icsEnd:"20260719T210000Z"},
+};
+const PHASE_CLASS = {amistoso:"amistoso",grupo:"grupo",matamata:"matamata"};
+const TODAY2 = new Date();
+
+function renderCal2(cid,y,m){
+  const el = document.getElementById(cid); if(!el) return;
+  const first = new Date(y,m-1,1).getDay(), total = new Date(y,m,0).getDate();
+  let html='';
+  for(let i=0;i<first;i++) html+='<div class="cal-day empty"></div>';
+  for(let d=1;d<=total;d++){
+    const ds=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isT=d===TODAY2.getDate()&&m===TODAY2.getMonth()+1&&y===TODAY2.getFullYear();
+    const g=CAL_GAMES[ds];
+    let cls='cal-day', onclick='', extra='';
+    if(isT) cls+=' today';
+    if(g){
+      if(g.past) cls+=' past-game';
+      else cls+=' '+PHASE_CLASS[g.phase];
+      onclick=`onclick="openSheet('${ds}')"`;
+      extra=`<span class="cal-df">${g.flag}</span><span class="cal-day-time">${g.time}</span>`;
+    }
+    html+=`<div class="${cls}" ${onclick}><span>${d}</span>${extra}</div>`;
+  }
+  el.innerHTML=html;
+}
+renderCal2('cal-mar',2026,3);
+renderCal2('cal-mai',2026,5);
+renderCal2('cal-jun',2026,6);
+renderCal2('cal-jul',2026,7);
+
+// ── AGENDA VIEW ──
+function renderAgenda(){
+  const el=document.getElementById('agenda-view'); if(!el) return;
+  const entries=Object.entries(CAL_GAMES).sort((a,b)=>a[0]>b[0]?1:-1);
+  let html='';
+  entries.forEach(([ds,g])=>{
+    const [y,m,d]=ds.split('-');
+    const months=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+    const mon=months[parseInt(m)-1];
+    const past=g.past;
+    const agClass=`ag-${g.phase}${past?' ag-past':''}`;
+    const scoreHtml=g.score?` <span style="color:${g.score.startsWith('3')||g.score.startsWith('2')||g.score.startsWith('1-0')||g.score==='1–0'?'var(--win)':g.score.startsWith('1')?'var(--loss)':'var(--draw)'}">${g.score}</span>`:'';
+    html+=`<div class="agenda-item" onclick="${past?'':` openSheet('${ds}')`}">
+      <div class="agenda-date"><div class="ag-day">${parseInt(d)}</div><div class="ag-mon">${mon}</div></div>
+      <div class="agenda-card ${agClass}">
+        <div class="ag-phase">${g.phase==='amistoso'?'Amistoso':g.phase==='grupo'?'Copa · Fase de Grupos':'Copa · Mata-Mata'}</div>
+        <div class="ag-match">🇧🇷 Brasil ${g.flag} ${g.label.replace('vs ','')}${scoreHtml}</div>
+        <div class="ag-meta"><span>⏰ ${g.time}</span><span>📍 ${g.venue.split(',')[0]}</span></div>
+      </div>
+    </div>`;
+  });
+  el.innerHTML=html;
+}
+renderAgenda();
+
+// ── VIEW TOGGLE ──
+function calView(v){
+  const grid=document.getElementById('cal-grid-wrap');
+  const agenda=document.getElementById('agenda-view');
+  const bg=document.getElementById('vbtn-grid');
+  const ba=document.getElementById('vbtn-agenda');
+  if(v==='grid'){
+    grid.classList.remove('hide');agenda.classList.remove('show');
+    bg.classList.add('active');ba.classList.remove('active');
+  } else {
+    grid.classList.add('hide');agenda.classList.add('show');
+    bg.classList.remove('active');ba.classList.add('active');
+  }
+}
+
+// ── BOTTOM SHEET ──
+function openSheet(ds){
+  const g=CAL_GAMES[ds]; if(!g||g.past) return;
+  const [y,m,d]=ds.split('-');
+  const months=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  const mon=months[parseInt(m)-1];
+  const phaseLabel=g.phase==='amistoso'?'Amistoso Internacional':g.phase==='grupo'?'Copa 2026 · Fase de Grupos':'Copa 2026 · Mata-Mata';
+  const awayName=g.label.replace('vs ','');
+  const icsBtn=g.icsStart?`<button class="sa-ics" onclick="downloadICS('Brasil x ${awayName}','${g.icsStart}','${g.icsEnd}','${g.venue}','${g.cazeLink}')">📅 Adicionar ao Calendário</button>`:'';
+  document.getElementById('sheetContent').innerHTML=`
+    <div class="sheet-phase">${phaseLabel}</div>
+    <div class="sheet-teams">
+      <div class="sheet-team"><span class="sheet-flag">🇧🇷</span><div class="sheet-tname">Brasil</div></div>
+      <div class="sheet-vs">VS</div>
+      <div class="sheet-team"><span class="sheet-flag">${g.flag}</span><div class="sheet-tname">${awayName}</div></div>
+    </div>
+    <div class="sheet-meta-grid">
+      <div class="sheet-meta-item"><div class="smi-label">Data</div><div class="smi-val">${parseInt(d)} ${mon} 2026</div></div>
+      <div class="sheet-meta-item"><div class="smi-label">Horário (BRT)</div><div class="smi-val">${g.time}</div></div>
+      <div class="sheet-meta-item" style="grid-column:1/-1"><div class="smi-label">Estádio</div><div class="smi-val">${g.venue}</div></div>
+    </div>
+    <div class="sheet-actions">
+      <a href="${g.cazeLink}" target="_blank" rel="noopener" class="sa-caze">🔴 Assistir na CAZÉ TV</a>
+      ${icsBtn}
+    </div>`;
+  document.getElementById('sheetOverlay').classList.add('show');
+  document.getElementById('calSheet').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeSheet(){
+  document.getElementById('sheetOverlay').classList.remove('show');
+  document.getElementById('calSheet').classList.remove('show');
+  document.body.style.overflow='';
+}
+
+// ── ELENCO WITH FIGURINHAS ──
+const PLAYERS2 = {
+  "Goleiros":{pos:"GK",players:[
+    {n:1,  name:"Alisson",          club:"Liverpool",     clubId:44,   pid:209328, flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:12, name:"Ederson",          club:"Fenerbahçe",    clubId:2672, pid:144666, flag:"🇹🇷"},
+    {n:23, name:"Weverton",         club:"Grêmio",        clubId:1971, pid:68659,  flag:"🇧🇷"},
+  ]},
+  "Defensores":{pos:"DEF",players:[
+    {n:2,  name:"Alex Sandro",      club:"Flamengo",      clubId:1960, pid:19462,  flag:"🇧🇷"},
+    {n:3,  name:"Bremer",           club:"Juventus",      clubId:2687, pid:780692, flag:"🇮🇹"},
+    {n:4,  name:"Danilo",           club:"Flamengo",      clubId:1960, pid:99035,  flag:"🇧🇷"},
+    {n:5,  name:"Douglas Santos",   club:"Zenit",         clubId:2717, pid:269596, flag:"🇷🇺"},
+    {n:6,  name:"Gabriel Magalhães",club:"Arsenal",       clubId:42,   pid:856116, flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:14, name:"Ibañez",           club:"Al-Ahli",       clubId:5068, pid:755879, flag:"🇸🇦"},
+    {n:13, name:"Léo Pereira",      club:"Flamengo",      clubId:1960, pid:394283, flag:"🇧🇷"},
+    {n:15, name:"Marquinhos",       club:"PSG",           clubId:1644, pid:106299, flag:"🇫🇷"},
+    {n:22, name:"Wesley",           club:"Roma",          clubId:84,   pid:1143709,flag:"🇮🇹"},
+  ]},
+  "Meio-campistas":{pos:"MID",players:[
+    {n:8,  name:"Bruno Guimarães",  club:"Newcastle",     clubId:39,   pid:903886, flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:16, name:"Casemiro",         club:"Man. United",   clubId:35,   pid:73459,  flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:17, name:"Danilo Santos",    club:"Botafogo",      clubId:1963, pid:1009218,flag:"🇧🇷"},
+    {n:18, name:"Fabinho",          club:"Al-Ittihad",    clubId:2834, pid:114605, flag:"🇸🇦"},
+    {n:10, name:"Paquetá",          club:"Flamengo",      clubId:1960, pid:795526, flag:"🇧🇷"},
+  ]},
+  "Atacantes":{pos:"FWD",players:[
+    {n:9,  name:"Endrick",          club:"Lyon",          clubId:1649, pid:1358539,flag:"🇫🇷"},
+    {n:11, name:"Martinelli",       club:"Arsenal",       clubId:42,   pid:895528, flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:19, name:"Igor Thiago",      club:"Brentford",     clubId:55,   pid:1025735,flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:21, name:"Luiz Henrique",    club:"Zenit",         clubId:2717, pid:912042, flag:"🇷🇺"},
+    {n:7,  name:"Matheus Cunha",    club:"Man. United",   clubId:35,   pid:878820, flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:10, name:"Neymar Jr.",       club:"Santos",        clubId:1977, pid:171386, flag:"🇧🇷",star:true},
+    {n:20, name:"Raphinha",         club:"Barcelona",     clubId:2817, pid:766591, flag:"🇪🇸"},
+    {n:26, name:"Rayan",            club:"Bournemouth",   clubId:40,   pid:1597532,flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+    {n:7,  name:"Vini Jr.",         club:"Real Madrid",   clubId:2829, pid:949985, flag:"🇪🇸",star:true},
+  ]},
+};
+
+function initials(name){return name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}
+
+function renderElenco2(){
+  const el=document.getElementById('elenco-content'); if(!el) return;
+  let html='';
+  const IMG='https://api.sofascore.app/api/v1';
+  Object.entries(PLAYERS2).forEach(([pos,{pos:posBadge,players}])=>{
+    html+=`<div class="pos-section-head">${pos} <span class="pos-count">(${players.length})</span></div><div class="fig-grid">`;
+    players.forEach(p=>{
+      const starCls=p.star?' fig-star':'';
+      const starBadge=p.star?'<div class="fig-star-badge">⭐ ESTRELA</div>':'';
+      const ini=initials(p.name);
+      html+=`<div class="fig-card${starCls}">
+        ${starBadge}
+        <div class="fig-head">
+          <span class="fig-num">${p.n}</span>
+          <span class="fig-pos-badge">${posBadge}</span>
+        </div>
+        <div class="fig-photo-wrap">
+          <img class="fig-photo" 
+               src="${IMG}/player/${p.pid}/image"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="fig-initials" style="display:none">${ini}</div>
+        </div>
+        <div class="fig-info">
+          <div class="fig-name">${p.name}</div>
+          <div class="fig-club-row">
+            <img class="fig-club-logo"
+                 src="${IMG}/team/${p.clubId}/image"
+                 onerror="this.style.display='none'">
+            <span class="fig-club-name">${p.club}</span>
+            <span class="fig-country">${p.flag}</span>
+          </div>
+        </div>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  el.innerHTML=html;
+}
+if(document.getElementById("elenco-content")) renderElenco2();
+
 </script>
 </body>
 </html>
