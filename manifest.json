@@ -1,0 +1,16 @@
+{
+  "name": "Brasil Copa 2026",
+  "short_name": "Copa26",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#06120c",
+  "theme_color": "#06120c",
+  "description": "Central para acompanhar o Brasil na Copa do Mundo FIFA 2026.",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

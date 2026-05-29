@@ -1,0 +1,11 @@
+{
+  "name": "brasil-copa26",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Site estático para acompanhar o Brasil na Copa 2026.",
+  "scripts": {
+    "validate": "node scripts/validate-data.js",
+    "check:js": "node --check js/app.js && node --check data/site-data.js && node --check scripts/validate-data.js",
+    "dev": "python -m http.server 4173"
+  }
+}

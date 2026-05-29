@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#06120c"/>
+      <stop offset=".45" stop-color="#0b3320"/>
+      <stop offset="1" stop-color="#072846"/>
+    </linearGradient>
+    <linearGradient id="diamond" x1="0" x2="1">
+      <stop offset="0" stop-color="#ffdf00"/>
+      <stop offset="1" stop-color="#fff3a3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g opacity=".18" stroke="#f4f7ef">
+    <path d="M0 80h1200M0 160h1200M0 240h1200M0 320h1200M0 400h1200M0 480h1200M0 560h1200"/>
+    <path d="M120 0v630M240 0v630M360 0v630M480 0v630M600 0v630M720 0v630M840 0v630M960 0v630M1080 0v630"/>
+  </g>
+  <path d="M892 110 1110 315 892 520 674 315z" fill="url(#diamond)" opacity=".95"/>
+  <circle cx="892" cy="315" r="115" fill="#0057b8"/>
+  <path d="M752 306c74-48 206-48 280 0" fill="none" stroke="#f4f7ef" stroke-width="22" stroke-linecap="round"/>
+  <text x="90" y="190" font-family="Arial,sans-serif" font-size="34" font-weight="800" fill="#ffdf00" letter-spacing="8">RUMO AO HEXA</text>
+  <text x="86" y="320" font-family="Impact,Arial Black,sans-serif" font-size="118" fill="#f4f7ef">BRASIL</text>
+  <text x="90" y="430" font-family="Impact,Arial Black,sans-serif" font-size="104" fill="#ffdf00">COPA 2026</text>
+  <text x="94" y="500" font-family="Arial,sans-serif" font-size="30" fill="#c7d5cc">Agenda, grupo, caminho, elenco e estádios</text>
+</svg>

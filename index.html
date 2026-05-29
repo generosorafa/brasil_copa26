@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brasil Copa 2026 | Rumo ao Hexa</title>
+  <meta name="description" content="Agenda, grupo, caminho no mata-mata, elenco e estádios do Brasil na Copa do Mundo FIFA 2026.">
+  <meta name="theme-color" content="#06120c">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Brasil Copa 2026">
+  <meta property="og:description" content="Central para acompanhar a Seleção Brasileira na Copa 2026.">
+  <meta property="og:image" content="assets/og-card.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://en.wikipedia.org">
+  <link rel="preconnect" href="https://api.sofascore.app">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script defer src="data/site-data.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="brand-mark" aria-hidden="true">BR</div>
+      <div class="brand-copy">
+        <strong>Brasil Copa 2026</strong>
+        <span>Rumo ao Hexa</span>
+      </div>
+      <div class="header-side">
+        <span class="data-stamp" id="dataStamp"></span>
+        <button class="all-calendar-btn" type="button" data-download-ics="all" aria-label="Baixar calendário do Brasil">
+          <i data-lucide="calendar-plus" aria-hidden="true"></i>
+          <span>Calendário</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="match-hero" aria-live="polite">
+      <img class="hero-bg" id="heroBg" alt="">
+      <div class="hero-content">
+        <div>
+          <div class="hero-kicker">
+            <span class="status-pill" id="heroBadge">Carregando</span>
+            <span class="hero-phase" id="heroPhase">Brasil</span>
+          </div>
+          <h1 class="hero-title" id="heroTitle">Brasil na Copa</h1>
+          <div class="hero-teams" id="heroTeams"></div>
+          <div class="hero-meta" id="heroMeta"></div>
+        </div>
+        <aside class="hero-panel">
+          <div class="countdown" id="heroCountdown"></div>
+          <p class="hero-insight" id="heroInsight"></p>
+          <div class="hero-actions" id="heroActions"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="quick-stats" id="quickStats" aria-label="Resumo rápido"></section>
+
+    <nav class="tab-nav" id="tabNav" aria-label="Seções do site"></nav>
+
+    <main class="main-content">
+      <section class="app-section active" id="section-jogos">
+        <div class="section-heading">
+          <div>
+            <h2>Jogos</h2>
+            <p>Do último teste até uma possível final, tudo sai da mesma base de dados.</p>
+          </div>
+        </div>
+        <div id="gamesTimeline"></div>
+      </section>
+
+      <section class="app-section" id="section-caminho">
+        <div class="section-heading">
+          <div>
+            <h2>Caminho</h2>
+            <p>Um bracket simples para visualizar o impacto de terminar em primeiro ou segundo no Grupo C.</p>
+          </div>
+        </div>
+        <div class="route-toggle" id="routeToggle" aria-label="Selecionar cenário"></div>
+        <p class="path-summary" id="pathSummary"></p>
+        <div class="bracket-board" id="bracketBoard"></div>
+      </section>
+
+      <section class="app-section" id="section-grupo">
+        <div class="section-heading">
+          <div>
+            <h2>Grupo C</h2>
+            <p>Tabela calculada automaticamente a partir dos placares oficiais cadastrados.</p>
+          </div>
+        </div>
+        <div class="group-layout">
+          <div>
+            <div class="table-wrap">
+              <table aria-label="Classificação do Grupo C">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Seleção</th>
+                    <th>PJ</th>
+                    <th>V</th>
+                    <th>E</th>
+                    <th>D</th>
+                    <th>GP</th>
+                    <th>GC</th>
+                    <th>SG</th>
+                    <th>PTS</th>
+                  </tr>
+                </thead>
+                <tbody id="groupTableBody"></tbody>
+              </table>
+            </div>
+            <div class="section-heading compact">
+              <span>Rodadas</span>
+              <small>Todos os jogos do grupo</small>
+            </div>
+            <div class="game-list" id="groupFixtures"></div>
+          </div>
+          <aside>
+            <div class="section-heading compact">
+              <span>Adversários</span>
+              <small>Leitura rápida do grupo</small>
+            </div>
+            <div class="opponent-grid" id="groupOpponents"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="app-section" id="section-calendario">
+        <div class="section-heading">
+          <div>
+            <h2>Agenda</h2>
+            <p>Calendário e lista puxam os mesmos jogos usados nos cards e lembretes.</p>
+          </div>
+        </div>
+        <div class="calendar-toggle">
+          <button class="active" type="button" data-calendar-view="grid">
+            <i data-lucide="calendar-days" aria-hidden="true"></i> Calendário
+          </button>
+          <button type="button" data-calendar-view="agenda">
+            <i data-lucide="list" aria-hidden="true"></i> Lista
+          </button>
+        </div>
+        <div class="calendar-shell">
+          <div class="month-grid-panel" id="calendarGridPanel">
+            <div id="calendarMonths" class="month-grid-panel"></div>
+          </div>
+          <div class="agenda-list hidden" id="calendarAgenda"></div>
+        </div>
+      </section>
+
+      <section class="app-section" id="section-elenco">
+        <div class="section-heading">
+          <div>
+            <h2>Elenco</h2>
+            <p>Álbum de figurinhas com filtros por posição e fallback quando a foto não carregar.</p>
+          </div>
+        </div>
+        <div class="filter-row" id="playerFilters" aria-label="Filtrar elenco"></div>
+        <div class="players-grid" id="playersGrid"></div>
+      </section>
+
+      <section class="app-section" id="section-estadios">
+        <div class="section-heading">
+          <div>
+            <h2>Estádios</h2>
+            <p>Sedes do caminho brasileiro, com imagens reais carregadas sob demanda.</p>
+          </div>
+        </div>
+        <div class="venue-grid" id="venuesGrid"></div>
+      </section>
+    </main>
+
+    <footer class="source-footer">
+      <span>Brasil Copa 2026</span>
+      <div class="source-links" id="sourceLinks"></div>
+    </footer>
+  </div>
+
+  <div class="sheet-overlay" id="sheetOverlay"></div>
+  <aside class="game-sheet" id="gameSheet" aria-modal="true" aria-label="Detalhes do jogo">
+    <div class="sheet-handle"></div>
+    <button class="sheet-close" type="button" data-close-sheet aria-label="Fechar detalhes">
+      <i data-lucide="x" aria-hidden="true"></i>
+    </button>
+    <div id="sheetBody"></div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
