@@ -7,8 +7,8 @@ const COPA26_DATA = {
     timezone: "America/Sao_Paulo",
     timezoneLabel: "BRT",
     locale: "pt-BR",
-    lastReviewed: "2026-05-29",
-    dataVersion: "2026.05.29",
+    lastReviewed: "2026-06-03",
+    dataVersion: "2026.06.03",
     defaultWatchUrl: "https://www.youtube.com/@CazeTV",
     sources: [
       {
@@ -233,10 +233,11 @@ const COPA26_DATA = {
       home: "brazil",
       away: "panama",
       venue: "maracana",
-      status: "scheduled",
-      score: null,
+      status: "final",
+      score: { home: 6, away: 2 },
       watchUrl: "https://www.youtube.com/@CazeTV",
-      importance: "next"
+      importance: "preparation",
+      sourceRef: "FIFA"
     },
     {
       id: "friendly-egypt",
@@ -251,7 +252,7 @@ const COPA26_DATA = {
       status: "scheduled",
       score: null,
       watchUrl: "https://www.youtube.com/@CazeTV",
-      importance: "preparation"
+      importance: "next"
     },
     {
       id: "group-brazil-morocco",
