@@ -139,6 +139,29 @@
     return `<span class="score-number">${game.score.home}<span>×</span>${game.score.away}</span>`;
   }
 
+  function goalSummaryText(game) {
+    const goals = Array.isArray(game.goals) ? game.goals : [];
+    if (!goals.length) return "";
+
+    return [game.home, game.away]
+      .map((teamId) => {
+        const teamGoals = goals.filter((goal) => goal.team === teamId);
+        if (!teamGoals.length) return "";
+
+        const scorers = teamGoals
+          .map((goal) => `${goal.player}${goal.minute ? ` (${goal.minute})` : ""}`)
+          .join(", ");
+        return `${team(teamId).shortName}: ${scorers}`;
+      })
+      .filter(Boolean)
+      .join(" · ");
+  }
+
+  function goalSummaryMarkup(game, className = "goal-line") {
+    const summary = goalSummaryText(game);
+    return summary ? `<div class="${className}">${icon("circle-dot")}<span>${esc(summary)}</span></div>` : "";
+  }
+
   function brazilOutcome(game) {
     if (!game.score || !isBrazilGame(game)) return "";
     const brazilHome = game.home === "brazil";
@@ -328,6 +351,7 @@
     const place = venue(game.venue);
     const badge = statusCopy(game);
     const outcome = brazilOutcome(game);
+    const goals = goalSummaryMarkup(game);
     const cardClasses = [
       "game-card",
       badge.className,
@@ -355,6 +379,7 @@
             <strong>${esc(away.shortName)}</strong>
           </div>
         </div>
+        ${goals}
         ${possible}
         <div class="game-footer">
           <span>${icon("calendar")} ${esc(fmtDayMonth(parseDate(game.date)))} · ${esc(fmtTime(game))}</span>
@@ -707,6 +732,7 @@
         <div>${scoreMarkup(game)}</div>
         <div><span>${away.flag}</span><strong>${esc(away.shortName)}</strong></div>
       </div>
+      ${goalSummaryMarkup(game, "sheet-goals")}
       <div class="sheet-grid">
         <span><small>Fase</small><strong>${esc(game.phase)}</strong></span>
         <span><small>Data</small><strong>${esc(fmtLongDate(parseDate(game.date)))}</strong></span>

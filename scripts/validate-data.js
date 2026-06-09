@@ -50,6 +50,22 @@ data.games.forEach((game) => {
       }
     });
   }
+
+  if (game.goals) {
+    if (!Array.isArray(game.goals)) {
+      fail(`Gols devem ser uma lista em ${game.id}`);
+    } else {
+      game.goals.forEach((goal, index) => {
+        if (![game.home, game.away].includes(goal.team)) {
+          fail(`Gol ${index + 1} em ${game.id} tem time fora da partida: ${goal.team}`);
+        }
+        if (!goal.player) fail(`Gol ${index + 1} em ${game.id} sem jogador`);
+        if (goal.minute && typeof goal.minute !== "string" && typeof goal.minute !== "number") {
+          fail(`Gol ${index + 1} em ${game.id} tem minuto invalido`);
+        }
+      });
+    }
+  }
 });
 
 data.players.forEach((player) => {

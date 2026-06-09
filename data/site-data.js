@@ -7,8 +7,8 @@ const COPA26_DATA = {
     timezone: "America/Sao_Paulo",
     timezoneLabel: "BRT",
     locale: "pt-BR",
-    lastReviewed: "2026-06-03",
-    dataVersion: "2026.06.03",
+    lastReviewed: "2026-06-09",
+    dataVersion: "2026.06.09",
     defaultWatchUrl: "https://www.youtube.com/@CazeTV",
     sources: [
       {
@@ -18,6 +18,10 @@ const COPA26_DATA = {
       {
         label: "FIFA - Calendario oficial da Copa 2026",
         url: "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums"
+      },
+      {
+        label: "365Scores - Brasil 2 x 1 Egito",
+        url: "https://www.365scores.com/pt-br/news/magazine/brasil-vence-egito-amistoso-copa-do-mundo/"
       }
     ]
   },
@@ -249,10 +253,16 @@ const COPA26_DATA = {
       home: "brazil",
       away: "egypt",
       venue: "huntington",
-      status: "scheduled",
-      score: null,
+      status: "final",
+      score: { home: 2, away: 1 },
+      goals: [
+        { team: "brazil", player: "Bruno Guimaraes", minute: "6/1T" },
+        { team: "egypt", player: "Ziko", minute: "10/1T" },
+        { team: "brazil", player: "Endrick", minute: "6/2T" }
+      ],
       watchUrl: "https://www.youtube.com/watch?v=CQeTZ1fCJFw",
-      importance: "next"
+      importance: "preparation",
+      sourceRef: "365Scores"
     },
     {
       id: "group-brazil-morocco",
@@ -267,6 +277,7 @@ const COPA26_DATA = {
       status: "scheduled",
       score: null,
       watchUrl: "https://www.youtube.com/watch?v=vC3fV_awcWE",
+      importance: "next",
       sourceRef: "FIFA"
     },
     {

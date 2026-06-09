@@ -690,6 +690,35 @@ button {
   font-size: 12px;
 }
 
+.goal-line,
+.sheet-goals {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+  border: 1px solid rgba(255, 223, 0, 0.18);
+  border-radius: var(--radius);
+  padding: 9px 10px;
+  color: rgba(244, 247, 239, 0.78);
+  background: rgba(255, 223, 0, 0.06);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.goal-line svg,
+.sheet-goals svg {
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  flex: 0 0 auto;
+  color: var(--yellow);
+}
+
+.goal-line span,
+.sheet-goals span {
+  min-width: 0;
+}
+
 .game-footer {
   display: flex;
   flex-wrap: wrap;
@@ -1385,6 +1414,10 @@ button.cal-day {
   display: block;
   font-family: "Bebas Neue", sans-serif;
   font-size: 24px;
+}
+
+.sheet-goals {
+  margin: -4px 0 14px;
 }
 
 .sheet-grid {
